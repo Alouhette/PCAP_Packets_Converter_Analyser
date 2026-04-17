@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Configuration file for AntRun.
+
+  Use this file to override the default properties contained
+  in build.xml. For example, to override the build.jar.filename
+  property (which sets the name of the compiled jar file), add
+  an element
+
+  <jar>
+    <filename>foo</filename>
+  </jar>
+
+  inside the <build> element.
+
+  **Caveat emptor:** in some cases, changing this file and running ant
+  again will result in Ant using a cached version of the old file! Run
+  "ant dummy" to make sure that the correct data is being read. Otherwise
+  you might need to run "ant clean" and start over.
+-->
+<build>
+  <!-- Uncomment any of these if you want to override the build
+       script's default values -->
+
+  <!-- The project's name -->
+  <name>Network packets analysis palette for BeepBeep 3</name>
+
+  <!-- The project's version number -->
+  <version>0.1</version>
+
+  <!-- The project's author. Currently this only
+  shows up in the footer of the Javadoc documentation. -->
+  <author>Sylvain Hall&#233;</author>
+
+  <!-- The project's main class -->
+  <mainclass>netp.Main</mainclass>
+
+  <!-- Installation folders -->
+  <srcdir>src</srcdir>
+  <libdir>lib</libdir>
+  <bindir>bin</bindir>
+  <depdir>dep</depdir>
+  <docdir>docs/javadoc</docdir>
+  <test>
+    <srcdir>src</srcdir>
+    <bindir>bin</bindir>
+    <depdir>dep</depdir>
+    <docdir>docs/javadoc</docdir>
+  </test>
+
+  <!-- The JDK to compile with -->
+  <targetjdk>11</targetjdk>
+
+  <!-- Output jar -->
+  <jar>
+    <filename>../netp</filename>
+    <withdoc>false</withdoc>
+  </jar>
+
+  <!--
+    Write JAR dependencies here.
+  -->
+  <dependencies>
+	  <dependency>
+      <!-- Jnetpcap. It is hosted on SourceForge, but a direct download is
+           very unreliable. We instead depend on binaries hosted directly in the
+           repository. -->
+      <name>BeepBeep 3</name>
+      <classname>ca.uqac.lif.cep.Processor</classname>
+      <files>
+	      <jar>https://github.com/liflab/beepbeep-3/releases/download/v3.13/beepbeep-3.13.jar</jar>
+      </files>
+      <bundle>false</bundle>
+    </dependency>
+   	<dependency>
+     <name>JAXB</name>
+      <classname>jakarta.xml.bind.DataConverter</classname>
+      <files>
+	      <jar>https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/4.0.5/jakarta.xml.bind-api-4.0.5.jar</jar>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
+ 
+  	<dependency>
+      <!-- Jnetpcap. It is hosted on SourceForge, but a direct download is
+           very unreliable. We instead depend on binaries hosted directly in the
+           repository. -->
+      <name>JNetPcap</name>
+      <classname>org.jnetpcap.packet.JRegistry</classname>
+      <files>
+        <!-- Uncomment one of these files, depending on your OS (and optionally change the server)
+        <zip>https://liflab.github.io/beepbeep-3-jnetpcap-palette/dep/jnetpcap-1.4.r1425-1.win32.zip</zip>
+        <tgz>https://liflab.github.io/beepbeep-3-jnetpcap-palette/dep/jnetpcap-1.4.r1425-1.linux32.i386.tgz</tgz>
+        <tgz>https://liflab.github.io/beepbeep-3-jnetpcap-palette/dep/jnetpcap-1.4.r1425-1.rhel5.x86_64.tgz</tgz>
+         <tgz>https://liflab.github.io/beepbeep-3-jnetpcap-palette/dep/jnetpcap-1.4.r1425-1.linux64.x86_64.tgz</tgz> 
+        -->
+      <zip>https://liflab.github.io/beepbeep-3-jnetpcap-palette/dep/jnetpcap-1.4.r1425-1.win64.zip</zip>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
+    <dependency>
+      <!-- Log4j. It is a Jnetpcap dependency. -->
+      <name>Log4j</name>
+      <classname>org.apache.logging.log4j.LogManager</classname>
+      <files>
+	      <zip>https://downloads.apache.org/logging/log4j/2.25.3/apache-log4j-2.25.3-bin.zip</zip>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
+  </dependencies>
+</build>
