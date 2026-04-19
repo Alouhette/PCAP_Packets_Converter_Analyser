@@ -3,7 +3,7 @@ import java.util.List;
 
 public class DetectionMethods {
 
-    public static  List<String>[] timestampSuspicious(FileContent fileContent, Long ts_diff_max, Long ts_diff_Hmax){
+    public static  List<String>[] TimestampSuspicious(FileContent fileContent, Long ts_diff_max, Long ts_diff_Hmax){
 
         List<List<String>> data = fileContent.getFile_content();
         List<String> suspicious_rows = new ArrayList<>();
@@ -18,7 +18,7 @@ public class DetectionMethods {
                     Highly_suspicious_rows.add((i-1)+"-"+i);
                 }   
                 else if (ts_diff <= ts_diff_Hmax && ts_diff >= ts_diff_Hmax*-1) {
-                    suspicious_rows.add((i-1)+"-"+i);
+                    Highly_suspicious_rows.add((i-1)+"-"+i);
                 }
                 else if (ts_diff <= ts_diff_max && ts_diff >= ts_diff_max*-1) {  
                     suspicious_rows.add((i-1)+"-"+i);
