@@ -135,8 +135,4 @@ public class DetectionMethods {
         System.out.println("Rows with suspicious port chaining : " + suspicious_rows + "\n");
         return new List[]{suspicious_rows, registeredPorts};
     }
-
-    //Du +
-    //Verif les ports précis : ssh(22), http(80), https(443), ftp(21), telnet(23)
-    //Enchainement de port 1 - 2 - 3 - 4
 }

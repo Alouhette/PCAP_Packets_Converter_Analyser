@@ -21,11 +21,17 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
+        //File name examples :
+        //Please consider that these 2 files already have a CSV file created from them
         String filename = "test.pcap";
         //String filename = "media_1000_pcap_anonymize.pcap";
-        /* 
+
+        /*
+        //Uncomment this block only if you want to create/recreate a CSV file from a pcap file
+        //Warning : Sometime the API used to read the pcap file might not work, in that case try again
 
         System.out.println("Currently Trying to read file : "+filename+"\n");
         
@@ -36,17 +42,27 @@ public class Main {
         System.out.println("Conversion to CSV finished\n");
         */
 
+
+        //This is how you create a FileContent object, which will read the CSV file and store its content in a List of List of String
+        FileContent detect = new FileContent(filename+"_output.csv");
+
+
+        /*
+        //Uncomment this block only if you want to read all the CSV file
         System.out.println("\nData read from CSV file:\n");
 
-        FileContent detect = new FileContent(filename+"_output.csv");
         List<List<String>> data = detect.getFile_content();
+        
         for (int i = 0; i < data.size(); i++) {
             List<String> row = data.get(i);
             System.out.println("Row " + i + ": " + String.join(", ", row));
         }
+        */
 
+        //Now we will use all the detections methods on the FileContent we created
         System.out.println("\n\nDetection of suspicious patterns:\n\n");
-        List<String>[] timestampSuspicious = DetectionMethods.timestampSuspicious(detect, 10L,1L);
+
+        List<String>[] timestampSuspicious = DetectionMethods.TimestampSuspicious(detect, 10L,1L);
         List<Integer> payloadLengthSuspicious = DetectionMethods.PayloadLength_1(detect);
         List<Integer> packetSizeSuspicious = DetectionMethods.PacketSizeSuspicious(detect);
         List<String>[] ipCountSuspicious = DetectionMethods.IpCountSuspicious(detect);
