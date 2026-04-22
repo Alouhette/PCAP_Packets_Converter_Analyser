@@ -113,14 +113,16 @@ public class DetectionMethods {
         int[] start_end = new int[2];
         for (int i = 1; i < data.size(); i++) {
             List<String> row = data.get(i);
+            Integer nextPort = Integer.parseInt(row.get(3));
+            
             if (registeredIp == null){
                 registeredIp = row;
-                start_end[0] = Integer.parseInt(row.get(2));
-                start_end[1] = Integer.parseInt(row.get(2));
+                start_end[0] = Integer.parseInt(row.get(3));
+                start_end[1] = Integer.parseInt(row.get(3));
 
             }
-            else if(registeredIp.get(0).equals(row.get(0)) && (Integer.parseInt(registeredIp.get(3)) == (Integer.parseInt(row.get(3)) + 1))){
-                start_end[1] = Integer.parseInt(row.get(3));
+            else if((registeredIp.get(0).strip()).equals(row.get(0).strip()) && (start_end[1] + 1 == nextPort)){
+                start_end[1] = nextPort;
             }
             else{
                 if(start_end[1] != start_end[0]){
@@ -128,11 +130,12 @@ public class DetectionMethods {
                     registeredPorts.add(start_end[0] + "->" + start_end[1]);
                 }
                 registeredIp = row;
-                start_end[0] = Integer.parseInt(row.get(2));
-                start_end[1] = Integer.parseInt(row.get(2));
+                start_end[0] = Integer.parseInt(row.get(3));
+                start_end[1] = Integer.parseInt(row.get(3));
             }
         }
-        System.out.println("Rows with suspicious port chaining : " + suspicious_rows + "\n");
+        System.out.println("Rows with suspicious port chaining Ips : " + suspicious_rows);
+        System.out.println("Port chains : " + registeredPorts + "\n");
         return new List[]{suspicious_rows, registeredPorts};
     }
 }
